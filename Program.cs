@@ -1,4 +1,5 @@
-﻿using Akane.commands;
+﻿using Akane.Commands.Prefix;
+using Akane.Commands.SlashCommands;
 using Akane.config;
 using Akane.Engine;
 using Akane.Engine.ImageHandler;
@@ -8,6 +9,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Lavalink;
