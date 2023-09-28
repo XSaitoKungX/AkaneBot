@@ -5,7 +5,7 @@ namespace Akane.Engine.ImageHandler
     internal class GoogleImageHandler
     {
         public Dictionary<int, string> images = new Dictionary<int, string>();
-        public static readonly GoogleImageHandler googleImageHandler = new GoogleImageHandler();
+        public static readonly GoogleImageHandler Instance = new GoogleImageHandler();
 
         static GoogleImageHandler() { }
 
