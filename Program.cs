@@ -115,29 +115,9 @@ namespace Akane
             await Task.Delay(-1);
         }
 
-        private static async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs args)
+        private static Task Client_Ready(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
         {
-            // Casting ErrorEventArgs as a ChecksFailedException
-            if (args.Exception is ChecksFailedException castedException)
-            {
-                string cooldownTimer = string.Empty;
-
-                foreach (var check in castedException.FailedChecks)
-                {
-                    var cooldown = (CooldownAttribute)check; // The cooldown that has triggered this method
-                    TimeSpan timeLeft = cooldown.GetRemainingCooldown(args.Context); // Getting the remaining time on this cooldown
-                    cooldownTimer = timeLeft.ToString(@"hh\:mm\:ss");
-                }
-
-                var cooldownMessage = new DiscordEmbedBuilder()
-                {
-                    Title = "Du bist im Cooldown-Modus. Bitte warte, bis der Cooldown abläuft",
-                    Description = "Verbleibende Zeit: " + cooldownTimer,
-                    Color = DiscordColor.Red
-                };
-
-                await args.Context.Channel.SendMessageAsync(cooldownMessage);
-            }
+            return Task.CompletedTask;
         }
 
         private static async Task UserJoinHandler(DiscordClient sender, DSharpPlus.EventArgs.GuildMemberAddEventArgs args)
@@ -366,9 +346,29 @@ namespace Akane
             }
         }
 
-        private static Task Client_Ready(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
+        private static async Task OnCommandError(CommandsNextExtension sender, CommandErrorEventArgs args)
         {
-            return Task.CompletedTask;
+            // Casting ErrorEventArgs as a ChecksFailedException
+            if (args.Exception is ChecksFailedException castedException)
+            {
+                string cooldownTimer = string.Empty;
+
+                foreach (var check in castedException.FailedChecks)
+                {
+                    var cooldown = (CooldownAttribute)check; // The cooldown that has triggered this method
+                    TimeSpan timeLeft = cooldown.GetRemainingCooldown(args.Context); // Getting the remaining time on this cooldown
+                    cooldownTimer = timeLeft.ToString(@"hh\:mm\:ss");
+                }
+
+                var cooldownMessage = new DiscordEmbedBuilder()
+                {
+                    Title = "Du bist im Cooldown-Modus. Bitte warte, bis der Cooldown abläuft",
+                    Description = "Verbleibende Zeit: " + cooldownTimer,
+                    Color = DiscordColor.Red
+                };
+
+                await args.Context.Channel.SendMessageAsync(cooldownMessage);
+            }
         }
     }
 }
