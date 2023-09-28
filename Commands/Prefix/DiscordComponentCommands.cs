@@ -1,5 +1,4 @@
-﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
+﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using System;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Akane.Commands.Prefix
 {
-    internal class DiscordComponent : BaseCommandModule
+    internal class DiscordComponentCommands : BaseCommandModule
     {
         // This class shows how to make implement different DiscordComponent types
         private readonly Random random = new Random();
