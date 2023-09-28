@@ -9,7 +9,6 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
-using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Lavalink;
@@ -85,7 +84,7 @@ namespace Akane
             Commands.RegisterCommands<Fun>();
             Commands.RegisterCommands<Info>();
             Commands.RegisterCommands<Music>();
-            Commands.RegisterCommands<DiscordComponent>();
+            Commands.RegisterCommands<DiscordComponentCommands>();
 
             // Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
