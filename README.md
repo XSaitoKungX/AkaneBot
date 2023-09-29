@@ -4,14 +4,21 @@
   <br>
   <a href="https://github.com/XSaitoKungX"><img src="/Images/Akane.jpg" height="500" alt="Discord Bot with DSharpPlus v4.4.2"></a>
   <br>
-  Discord.js v14 Bot
+  Discord Bot with DSharpPlus v4.4.2
   <br>
 </h1>
 
 ## 👋 Willkommen
 Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet! Unser Bot unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
 
-**Funktionen:**
+## <img src="https://cdn.discordapp.com/emojis/859424401186095114.png" width="20px" height="20px">》Beschreibungen
+![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=XSaitoKungX&repo=AkaneBot&theme=tokyonight)
+
+## <img src="https://cdn.discordapp.com/emojis/852881450667081728.gif" width="20px" height="20px">》Funktionen
+* [x] Slash Commands
+* [x] Update to Latest Version
+* [x] Simple Music Commands
+* [x] Easy to use
 
 - **Vielseitige Funktionen:** Unser Bot bietet eine breite Palette von Funktionen, darunter Moderation, Unterhaltung, nützliche Tools und mehr.
 
@@ -23,8 +30,27 @@ Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet
 
 Mache deinen Discord-Server zu einem noch besseren Ort für deine Community mit unserem multifunktionalen, benutzerfreundlichen Bot. Lade ihn noch heute ein und erlebe, wie einfach und unterhaltsam Discord sein kann!
 
-## Help & Support
+## <img src="https://cdn.discordapp.com/emojis/852881450667081728.gif" width="20px" height="20px">》To-Do
+* [] Automod
+* [] Custom Commands
+* [] Master Music Commands 
+* [] Tickets
+* [] Utility Commands
+* [] Suggestions
+* [] Reaction Roles
+* [] Family
+* [] Giveaways
+* [] Don't wanna host it yourself?
 
+## <img src="https://cdn.discordapp.com/emojis/1009754836314628146.gif" width="25px" height="25px">》Anforderungen
+* [Visual Studio](https://visualstudio.microsoft.com/de/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet)
+* Discord Token. Get it from [Discord Developers Portal](https://discord.com/developers/applications)
+* Giphy API Token. Get it from [Giphy Developers Portal](https://developers.giphy.com/)
+* APi Key for OpenAi `for ai chatbot`. Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys)
+
+## <img src="https://cdn.discordapp.com/emojis/814216203466965052.png" width="25px" height="25px">》Installationsanleitung
+
+## <img src="https://cdn.discordapp.com/emojis/1036083490292244493.png" width="15px" height="15px">》Help & Support
 Wenn du Probleme beim Erstellen deines eigenen Bots hast, teile sie bitte im Kommentarbereich der Videos mit oder finde mich in meinem eigenen Discord-Server und hinterlasse mir eine Benachrichtigung mit deinen Fragen.
 
 - [Join my Discord Server](https://discord.gg/NDfK6NPZVZ)
