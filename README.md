@@ -55,3 +55,13 @@ Wenn du Probleme beim Erstellen deines eigenen Bots hast, teile sie bitte im Kom
 
 - [Join my Discord Server](https://discord.gg/NDfK6NPZVZ)
 - [Invite the Bot](https://discord.com/api/oauth2/authorize?client_id=1155480674707460220&permissions=8&scope=applications.commands%20bot)
+
+## <img src="https://cdn.discordapp.com/emojis/814216203466965052.png" width="25px" height="25px">🤝 》Contributing
+
+1. [Fork the repository](https://github.com/XSaitoKungX/Magic-Music/fork)
+2. Clone your fork: `git clone https://github.com/your-username/Magic-Music.git`
+3. Create your feature branch: `git checkout -b my-new-feature`
+4. Stage changes `git add .`
+5. Commit your changes: `cz` OR `npm run commit` do not use `git commit`
+6. Push to the branch: `git push origin my-new-feature`
+7. Submit a pull request
