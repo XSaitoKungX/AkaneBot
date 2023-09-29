@@ -158,7 +158,7 @@ Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
 
 Die MIT-Lizenz ist eine Open-Source-Lizenz, die dir erlaubt, das Projekt in deinen eigenen Projekten zu verwenden, zu ändern und zu verteilen, solange du die Lizenzbedingungen einhältst. Weitere Informationen findest du in der [Lizenzdatei](LICENSE).
 
-```markdown
+```plaintext
 MIT License
 
 Urheberrecht (c) [2023] [XSaitoKungX]
