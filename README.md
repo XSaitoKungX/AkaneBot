@@ -1,5 +1,12 @@
 # Akane | Made with ❤ by [XSaitoKungX](https://github.com/XSaitoKungX) | Coded 100% in C#
-![Image](/Images/Akane.jpg)
+
+<h1 align="center">
+  <br>
+  <a href="https://github.com/XSaitoKungX"><img src="/Images/Akane.jpg" height="200" alt="Discord.js v14 Bot"></a>
+  <br>
+  Discord.js v14 Bot
+  <br>
+</h1>
 
 ## 👋 Willkommen
 Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet! Unser Bot unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
