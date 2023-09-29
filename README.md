@@ -111,9 +111,22 @@ Wenn du Unterstützung bei der Einrichtung oder Verwendung von Akane benötigst,
 
 - [XSaitoKungX](https://github.com/XSaitoKungX)
 
+Natürlich, ich kann dir helfen, den "Get Started" Abschnitt zu erweitern und die Lizenzinformationen zu ergänzen. Hier ist der aktualisierte Abschnitt:
+
 ## Lizenz 📝
 
 Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
-```
 
-Jetzt enthält die README-Datei die Emojis und andere Formatierungen, um sie ansprechender zu gestalten. Bitte überprüfe sie und lass mich wissen, ob weitere Anpassungen erforderlich sind.
+Die MIT-Lizenz ist eine Open-Source-Lizenz, die dir erlaubt, das Projekt in deinen eigenen Projekten zu verwenden, zu ändern und zu verteilen, solange du die Lizenzbedingungen einhältst. Weitere Informationen findest du in der [Lizenzdatei](LICENSE).
+
+```plaintext
+MIT License
+
+Urheberrecht (c) [2023] [XSaitoKungX]
+
+Die Erlaubnis wird hiermit kostenlos erteilt, jede Person, die eine Kopie dieser Software und der zugehörigen Dokumentationsdateien (die "Software") erhält, sie ohne Einschränkung zu verwenden, zu kopieren, zu ändern, zusammenzuführen, zu veröffentlichen, zu verteilen, zu sublizenzieren und/oder zu verkaufen, und Personen, denen die Software zur Verfügung gestellt wird, dies unter den folgenden Bedingungen zu gestatten:
+
+Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopien oder wesentlichen Teilen der Software enthalten sein.
+
+DIE SOFTWARE WIRD OHNE MÄNGELGEWÄHR UND OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNG DER MARKTFÄHIGKEIT, DER EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND DER NICHTVERLETZUNG VON RECHTEN DRITTER, BEREITGESTELLT. IN KEINEM FALL HAFTEN DIE AUTOREN ODER COPYRIGHT-INHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE HAFTUNG, OB AUS DEM VERTRAG, DELIKT ODER ANDEREN VERHALTENSWEISEN, DIE SICH AUS, IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER SONSTIGEN VERWENDUNG DER SOFTWARE ERGEBEN.
+```
