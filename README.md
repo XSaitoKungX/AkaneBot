@@ -134,7 +134,7 @@ Wenn du Unterstützung bei der Einrichtung oder Verwendung von Akane benötigst,
 
 ## Mitwirkende 🤝
 ### **Benutzerprofil 🧑‍💼**
-![Benutzerlogo](https://avatars.githubusercontent.com/u/64774999?v=4)
+![Benutzerlogo](https://avatars.githubusercontent.com/u/64774999?v=4&s=100)
 - **Benutzername:** [XSaitoKungX]
 - **GitHub:** [XSaitoKungX](https://github.com/XSaitoKungX/)
 
