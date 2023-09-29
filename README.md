@@ -1,4 +1,7 @@
-# AkaneBot
+# Akane | Made with ❤ by [XSaitoKungX](https://github.com/XSaitoKungX) | Coded 100% in C#
+![Lokales Bild](/Images/Akane.jpg)
+
+## 👋 Willkommen
 Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet! Unser Bot unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
 
 **Funktionen:**
@@ -13,5 +16,9 @@ Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet
 
 Mache deinen Discord-Server zu einem noch besseren Ort für deine Community mit unserem multifunktionalen, benutzerfreundlichen Bot. Lade ihn noch heute ein und erlebe, wie einfach und unterhaltsam Discord sein kann!
 
-# Test Bot
-[Joine unseren Server](https://discord.gg/NDfK6NPZVZ)
+## Help & Support
+
+Wenn du Probleme beim Erstellen deines eigenen Bots hast, teile sie bitte im Kommentarbereich der Videos mit oder finde mich in meinem eigenen Discord-Server und hinterlasse mir eine Benachrichtigung mit deinen Fragen.
+
+- [Join my Discord Server](https://discord.gg/NDfK6NPZVZ)
+- [Invite the Bot](https://discord.com/api/oauth2/authorize?client_id=1155480674707460220&permissions=8&scope=applications.commands%20bot)
