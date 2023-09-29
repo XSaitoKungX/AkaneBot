@@ -1,5 +1,6 @@
 ﻿using DSharpPlus;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,7 @@ namespace Akane.Commands.SlashCommands
             var resultsMessage = new DiscordMessageBuilder()
                 .AddEmbed(new DiscordEmbedBuilder()
                     .WithColor(DiscordColor.Green)
-                    .WithTitle("Results of Poll")
+                    .WithTitle("Ergebnis der Umfrage")
                     .WithDescription(resultsString));
 
             await ctx.Channel.SendMessageAsync(resultsMessage); //Making the embed and sending it off            
