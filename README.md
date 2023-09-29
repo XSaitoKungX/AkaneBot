@@ -1,72 +1,119 @@
-# Akane | Made with ❤ by [XSaitoKungX](https://github.com/XSaitoKungX) | Coded 100% in C#
+# Akane Discord Bot
 
-<h1 align="center">
+<p align="center">
   <br>
-  <a href="https://github.com/XSaitoKungX"><img src="/Images/Akane.jpg" height="500" alt="Discord Bot with DSharpPlus v4.4.2"></a>
+  <a href="https://github.com/XSaitoKungX"><img src="/Images/Akane.jpg" height="500" alt="Akane Discord Bot"></a>
   <br>
-  Discord Bot with DSharpPlus v4.4.2
+  Ein multifunktionaler Discord-Bot, entwickelt mit ❤ von [XSaitoKungX](https://github.com/XSaitoKungX)
   <br>
-</h1>
+</p>
 
-## 👋 Willkommen
-Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet! Unser Bot unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
+## Willkommen 👋
 
-## <img src="https://cdn.discordapp.com/emojis/859424401186095114.png" width="20px" height="20px"> 》Beschreibungen
-![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=XSaitoKungX&repo=AkaneBot&theme=tokyonight)
+Willkommen beim Akane Discord Bot! Dieser vielseitige Bot bietet deinem Discord-Server echten Mehrwert. Akane unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
 
-## <img src="https://cdn.discordapp.com/emojis/852881450667081728.gif" width="20px" height="20px"> 》Funktionen
-* [x] Slash Commands
-* [x] Update to Latest Version
-* [x] Simple Music Commands
-* [x] Easy to use
+## Ressourcen Links 📚
 
-- **Vielseitige Funktionen:** Unser Bot bietet eine breite Palette von Funktionen, darunter Moderation, Unterhaltung, nützliche Tools und mehr.
+- [Link zur Dokumentation](https://dsharpplus.github.io/DSharpPlus/)
 
-- **Benutzerfreundlich:** Wir haben es uns zur Aufgabe gemacht, die Verwendung unseres Bots so einfach wie möglich zu gestalten. Du musst kein erfahrener Entwickler sein, um von all seinen Möglichkeiten zu profitieren.
+## Beschreibung
 
-- **Besseres Discord-Erlebnis:** Unser Ziel ist es, die Qualität deiner Discord-Community zu steigern, indem wir dir Werkzeuge an die Hand geben, um das Servermanagement zu vereinfachen und das Engagement deiner Mitglieder zu fördern.
+Der Akane Discord Bot ist ein leistungsstarker, benutzerfreundlicher Bot, der entwickelt wurde, um deinem Server Funktionalitäten hinzuzufügen und das Discord-Erlebnis deiner Community zu verbessern. Mit einer breiten Palette von Funktionen, darunter Slash-Commands und einfache Musikbefehle, ist Akane die perfekte Ergänzung für jeden Discord-Server.
 
-- **Hilfe und Support:** Wir stehen dir jederzeit zur Verfügung, um Fragen zu beantworten und Unterstützung zu bieten. Dein Server steht an erster Stelle!
+## Funktionen 🚀
 
-Mache deinen Discord-Server zu einem noch besseren Ort für deine Community mit unserem multifunktionalen, benutzerfreundlichen Bot. Lade ihn noch heute ein und erlebe, wie einfach und unterhaltsam Discord sein kann!
+- **Slash Commands**: Nutze die neuesten Discord-Features mit Slash-Commands, um Befehle auf eine intuitive Weise auszuführen.
+- **Einfache Aktualisierung**: Halte deinen Bot immer auf dem neuesten Stand, um von den neuesten Funktionen und Verbesserungen zu profitieren.
+- **Musikbefehle**: Genieße Musik in deinem Voice-Channel mit einfachen Musikbefehlen.
+- **Benutzerfreundlich**: Akane ist einfach zu verwenden und bietet eine reibungslose Erfahrung für alle Benutzer.
 
-## <img src="https://cdn.discordapp.com/emojis/852881450667081728.gif" width="20px" height="20px"> 》To-Do
-* [] Automod
-* [] Custom Commands
-* [] Master Music Commands 
-* [] Tickets
-* [] Utility Commands
-* [] Suggestions
-* [] Reaction Roles
-* [] Family
-* [] Giveaways
-* [] Don't wanna host it yourself?
+## To-Do 📝
 
-## <img src="https://cdn.discordapp.com/emojis/1009754836314628146.gif" width="25px" height="25px"> 》Anforderungen
-* [Visual Studio](https://visualstudio.microsoft.com/de/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet)
-* Discord Token. Get it from [Discord Developers Portal](https://discord.com/developers/applications)
-* Giphy API Token. Get it from [Giphy Developers Portal](https://developers.giphy.com/)
-* APi Key for OpenAi `for ai chatbot`. Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys)
+- [ ] Automoderation
+- [ ] Benutzerdefinierte Befehle
+- [ ] Erweiterte Musikbefehle
+- [ ] Ticketsystem
+- [ ] Nützliche Befehle
+- [ ] Vorschläge
+- [ ] Reaktionsrollen
+- [ ] Familienfunktionen
+- [ ] Gewinnspiele
+- [ ] Möchtest du den Bot nicht selbst hosten?
 
-## 🌎 Locales
+## Anforderungen 🌐
+
+Bevor du Akane verwenden kannst, stelle sicher, dass du folgende Anforderungen erfüllst:
+
+- [Visual Studio](https://visualstudio.microsoft.com/de/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet)
+- [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
+- [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus)
+- Discord-Token: Erhalte ihn von der [Discord Developer-Plattform](https://discord.com/developers/applications)
+- Giphy-API-Token: Erhalte ihn von der [Giphy Developer-Plattform](https://developers.giphy.com/)
+- API-Schlüssel für OpenAI (für den Chatbot): Erhalte ihn von der [OpenAI Developer-Plattform](https://beta.openai.com/account/api-keys)
+
+## Locales 🌎
 
 Derzeit verfügbare Gebietsschemata sind:
+
 - German (de)
 
-## <img src="https://cdn.discordapp.com/emojis/814216203466965052.png" width="25px" height="25px"> 》Installationsanleitung
+## Installationsanleitung 🏁
 
-## <img src="https://cdn.discordapp.com/emojis/1036083490292244493.png" width="15px" height="15px"> 》Help & Support
-Wenn du Probleme beim Erstellen deines eigenen Bots hast, teile sie bitte im Kommentarbereich der Videos mit oder finde mich in meinem eigenen Discord-Server und hinterlasse mir eine Benachrichtigung mit deinen Fragen.
+Folge diesen Schritten, um Akane auf deinem Server zu installieren:
 
-- [Join my Discord Server](https://discord.gg/NDfK6NPZVZ)
-- [Invite the Bot](https://discord.com/api/oauth2/authorize?client_id=1155480674707460220&permissions=8&scope=applications.commands%20bot)
+1. [Fork das Repository](https://github.com/XSaitoKungX/AkaneBot/fork)
+2. Clone dein Fork: `git clone https://github.com/dein-benutzername/AkaneBot.git`
+3. Erstelle einen Feature-Branch: `git checkout -b mein-neues-feature`
+4. Stage deine Änderungen: `git add .`
+5. Commit deine Änderungen: Verwende `cz` oder `npm run commit`, aber nicht `git commit`
+6. Push deinen Branch: `git push origin mein-neues-feature`
+7. Erstelle eine Pull-Anfrage
 
-## 🤝 》Contributing
+## Get Started 🏁
 
-1. [Fork the repository](https://github.com/XSaitoKungX/AkaneBot/fork)
-2. Clone your fork: `git clone https://github.com/your-username/AkaneBot.git`
-3. Create your feature branch: `git checkout -b my-new-feature`
-4. Stage changes `git add .`
-5. Commit your changes: `cz` OR `npm run commit` do not use `git commit`
-6. Push to the branch: `git push origin my-new-feature`
-7. Submit a pull request
+Verwende den folgenden Code, um Akane in deinem Projekt zu integrieren:
+
+```csharp
+using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using System;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var discord = new DiscordClient(new DiscordConfiguration
+        {
+            // Füge deine Konfiguration hier ein
+        });
+
+        var commands = discord.UseCommandsNext(new CommandsNextConfiguration
+        {
+            // Füge deine Befehlskonfiguration hier ein
+        });
+
+        commands.RegisterCommands<DeinBefehlsmodul>();
+
+        await discord.ConnectAsync();
+        await Task.Delay(-1);
+    }
+}
+```
+
+## Help & Support 🤝
+
+Wenn du Unterstützung bei der Einrichtung oder Verwendung von Akane benötigst, stehe ich dir gerne zur Verfügung. Du kannst mich im Kommentarbereich erreichen oder in meinem Discord-Server, wo du weitere Hilfe und Unterstützung erhalten kannst.
+
+- [Trete meinem Discord-Server bei](https://discord.gg/NDfK6NPZVZ)
+- [Lade den Bot ein](https://discord.com/api/oauth2/authorize?client_id=1155480674707460220&permissions=8&scope=applications.commands%20bot)
+
+## Mitwirkende 🤝
+
+- [XSaitoKungX](https://github.com/XSaitoKungX)
+
+## Lizenz 📝
+
+Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
+```
+
+Jetzt enthält die README-Datei die Emojis und andere Formatierungen, um sie ansprechender zu gestalten. Bitte überprüfe sie und lass mich wissen, ob weitere Anpassungen erforderlich sind.
