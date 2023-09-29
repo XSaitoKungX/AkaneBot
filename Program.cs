@@ -9,6 +9,7 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Lavalink;
@@ -24,8 +25,8 @@ namespace Akane
     internal class Program
     {
         // Main Discord Properties
-        private static DiscordClient Client { get; set; }
-        private static CommandsNextExtension Commands {  get; set; }
+        public static DiscordClient Client { get; set; }
+        public static CommandsNextExtension Commands {  get; set; }
 
         // Miscaleneous Properties
         private static int ImageIDCounter = 0;
