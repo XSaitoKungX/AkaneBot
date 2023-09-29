@@ -34,20 +34,27 @@ Der Akane Discord Bot ist ein leistungsstarker, benutzerfreundlicher Bot, der en
 - **Benutzerfreundlich**: Akane ist einfach zu verwenden und bietet eine reibungslose Erfahrung für alle Benutzer.
 
 ## **Verfügbare Befehle**
-### **Allgemeine Befehle**
+### **Slash-Befehle**
 - `/test [text]`: Führt einen Test-Slash-Befehl aus.
 - `/poll [question] [timelimit] [option1] [option2] [option3] [option4]`: Erstellt eine Umfrage.
 - `/caption [caption] [image]`: Fügt einem Bild eine Beschriftung hinzu.
+- `/create-VC [channel-name] [member-limit]`: Erstellt einen Sprachkanal.
+- `/modal`: Zeigt ein Modal an.
 
-### **Moderationsbefehle**
-- `/ban [user] [reason]`: Sperrt einen Benutzer vom Server.
-- `/kick [user]`: Wirft einen Benutzer vom Server.
-- `/timeout [user] [duration]`: Setzt einen Benutzer auf Zeitraum.
+### **Prefix-Befehle**
+- `!help`: Zeigt eine Liste der verfügbaren Befehle an.
+- `!prefix [new-prefix]`: Ändert das Bot-Prefix auf den angegebenen Wert.
+- `!play [song]`: Spielt Musik in einem Sprachkanal ab.
+- `!skip`: Überspringt das aktuelle Musikstück.
+- `!ban [user] [reason]`: Sperrt einen Benutzer vom Server.
+- `!kick [user]`: Wirft einen Benutzer vom Server.
+- `!timeout [user] [duration]`: Setzt einen Benutzer auf Zeitraum.
 
 ## **Features**
 - 🤖 **Vielseitigkeit:** Der Bot bietet sowohl Unterhaltungs- als auch Moderationsbefehle.
 - 📊 **Umfragen:** Erstelle benutzerdefinierte Umfragen und sammle Abstimmungen von deinen Servermitgliedern.
 - 🖼️ **Bildbeschriftung:** Füge Textbeschriftungen zu Bildern hinzu, um sie persönlicher zu gestalten.
+- 🎵 **Musik-Bot:** Spiele Musik in Sprachkanälen ab und steuere die Wiedergabe.
 - 🛡️ **Moderation:** Moderiere deinen Server mit den integrierten Moderationsbefehlen.
 - ⚙️ **Anpassbarkeit:** Passe den Bot an deine Bedürfnisse an und füge weitere Befehle hinzu.
 
