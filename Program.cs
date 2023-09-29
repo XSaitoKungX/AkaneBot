@@ -85,6 +85,7 @@ namespace Akane
             Commands.RegisterCommands<Info>();
             Commands.RegisterCommands<Music>();
             Commands.RegisterCommands<DiscordComponentCommands>();
+            Commands.RegisterCommands<UserRequestedCommands>();
 
             // Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
