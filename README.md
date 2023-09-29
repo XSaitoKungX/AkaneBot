@@ -10,7 +10,7 @@
 
 ## Willkommen 👋
 
-Willkommen beim Akane Discord Bot! Dieser vielseitige Bot bietet deinem Discord-Server echten Mehrwert. Akane unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
+Willkommen beim Akane Discord Bot! Der Akane Discord Bot ist ein vielseitiger und anpassbarer Bot, der entwickelt wurde, um deine Discord-Server zu verbessern. Mit einer breiten Palette von Funktionen und Befehlen bietet dieser Bot eine unterhaltsame und nützliche Erfahrung für deine Community.
 
 ## Ressourcen Links 📚
 
@@ -21,11 +21,35 @@ Willkommen beim Akane Discord Bot! Dieser vielseitige Bot bietet deinem Discord-
 Der Akane Discord Bot ist ein leistungsstarker, benutzerfreundlicher Bot, der entwickelt wurde, um deinem Server Funktionalitäten hinzuzufügen und das Discord-Erlebnis deiner Community zu verbessern. Mit einer breiten Palette von Funktionen, darunter Slash-Commands und einfache Musikbefehle, ist Akane die perfekte Ergänzung für jeden Discord-Server.
 
 ## Funktionen 🚀
+- [x] Prefix
+- [x] Slash Commands
+- [x] Simple Music Commands
+- [x] Levelsystem
+- [x] Umfragesystem
+- [x] Benutzerfreundlich
 
 - **Slash Commands**: Nutze die neuesten Discord-Features mit Slash-Commands, um Befehle auf eine intuitive Weise auszuführen.
 - **Einfache Aktualisierung**: Halte deinen Bot immer auf dem neuesten Stand, um von den neuesten Funktionen und Verbesserungen zu profitieren.
 - **Musikbefehle**: Genieße Musik in deinem Voice-Channel mit einfachen Musikbefehlen.
 - **Benutzerfreundlich**: Akane ist einfach zu verwenden und bietet eine reibungslose Erfahrung für alle Benutzer.
+
+## **Verfügbare Befehle**
+### **Allgemeine Befehle**
+- `/test [text]`: Führt einen Test-Slash-Befehl aus.
+- `/poll [question] [timelimit] [option1] [option2] [option3] [option4]`: Erstellt eine Umfrage.
+- `/caption [caption] [image]`: Fügt einem Bild eine Beschriftung hinzu.
+
+### **Moderationsbefehle**
+- `/ban [user] [reason]`: Sperrt einen Benutzer vom Server.
+- `/kick [user]`: Wirft einen Benutzer vom Server.
+- `/timeout [user] [duration]`: Setzt einen Benutzer auf Zeitraum.
+
+## **Features**
+- 🤖 **Vielseitigkeit:** Der Bot bietet sowohl Unterhaltungs- als auch Moderationsbefehle.
+- 📊 **Umfragen:** Erstelle benutzerdefinierte Umfragen und sammle Abstimmungen von deinen Servermitgliedern.
+- 🖼️ **Bildbeschriftung:** Füge Textbeschriftungen zu Bildern hinzu, um sie persönlicher zu gestalten.
+- 🛡️ **Moderation:** Moderiere deinen Server mit den integrierten Moderationsbefehlen.
+- ⚙️ **Anpassbarkeit:** Passe den Bot an deine Bedürfnisse an und füge weitere Befehle hinzu.
 
 ## To-Do 📝
 
@@ -45,9 +69,10 @@ Der Akane Discord Bot ist ein leistungsstarker, benutzerfreundlicher Bot, der en
 Bevor du Akane verwenden kannst, stelle sicher, dass du folgende Anforderungen erfüllst:
 
 - [Visual Studio](https://visualstudio.microsoft.com/de/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&cid=2030&workload=dotnet-dotnetwebcloud&passive=false#dotnet)
-- [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
+- **.NET 6.0:** Stelle sicher, dass du die [neueste Version von .NET](https://dotnet.microsoft.com/download/dotnet/6.0) installiert hast.
 - [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus)
-- Discord-Token: Erhalte ihn von der [Discord Developer-Plattform](https://discord.com/developers/applications)
+- **DSharpPlus-Bibliothek:** Die Bot-Funktionalität basiert auf der DSharpPlus-Bibliothek. Installiere sie über NuGet mit dem Befehl: `dotnet add package DSharpPlus`.
+- Du benötigst ein Discord-Bot-Token. Erstelle deinen eigenen Bot auf der [Discord Developer-Website](https://discord.com/developers/applications) und kopiere den Token.
 - Giphy-API-Token: Erhalte ihn von der [Giphy Developer-Plattform](https://developers.giphy.com/)
 - API-Schlüssel für OpenAI (für den Chatbot): Erhalte ihn von der [OpenAI Developer-Plattform](https://beta.openai.com/account/api-keys)
 
@@ -111,8 +136,6 @@ Wenn du Unterstützung bei der Einrichtung oder Verwendung von Akane benötigst,
 
 - [XSaitoKungX](https://github.com/XSaitoKungX)
 
-Natürlich, ich kann dir helfen, den "Get Started" Abschnitt zu erweitern und die Lizenzinformationen zu ergänzen. Hier ist der aktualisierte Abschnitt:
-
 ## Lizenz 📝
 
 Dieses Projekt ist unter der [MIT-Lizenz](LICENSE) lizenziert.
@@ -130,3 +153,6 @@ Der obige Urheberrechtshinweis und dieser Erlaubnishinweis müssen in allen Kopi
 
 DIE SOFTWARE WIRD OHNE MÄNGELGEWÄHR UND OHNE JEGLICHE AUSDRÜCKLICHE ODER STILLSCHWEIGENDE GEWÄHRLEISTUNG, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE GEWÄHRLEISTUNG DER MARKTFÄHIGKEIT, DER EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND DER NICHTVERLETZUNG VON RECHTEN DRITTER, BEREITGESTELLT. IN KEINEM FALL HAFTEN DIE AUTOREN ODER COPYRIGHT-INHABER FÜR JEGLICHEN SCHADEN ODER SONSTIGE HAFTUNG, OB AUS DEM VERTRAG, DELIKT ODER ANDEREN VERHALTENSWEISEN, DIE SICH AUS, IN VERBINDUNG MIT DER SOFTWARE ODER DER NUTZUNG ODER SONSTIGEN VERWENDUNG DER SOFTWARE ERGEBEN.
 ```
+---
+
+© 2023 XSaitoKungX | Entwickelt mit ❤️ und Code
