@@ -49,7 +49,9 @@ namespace Akane.Commands.Prefix
         public async Task HelpCommand(CommandContext ctx)
         {
             var funButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "funButton", "Fun");
-            var gameButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "gameButton", "Games");
+            var infoButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "InfoButton", "Info");
+            var musicButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "MusicButton", "Music");
+            var aiButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "UserRequestButton", "AI");
 
             var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
             var helpMessage = new DiscordMessageBuilder()
@@ -59,7 +61,7 @@ namespace Akane.Commands.Prefix
                     Description = "Bitte wähle eine Schaltfläche aus, um weitere Informationen zu den Befehlen zu erhalten",
                     Color = randomColor
                 })
-                .AddComponents(funButton, gameButton);
+                .AddComponents(funButton, infoButton, musicButton, aiButton);
 
             await ctx.Channel.SendMessageAsync(helpMessage);
         }
