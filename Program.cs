@@ -18,6 +18,7 @@ using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Akane
@@ -32,6 +33,36 @@ namespace Akane
         private static int ImageIDCounter = 0;
         public static GoogleImageHandler imageHandler;
         private static Dictionary<string, ulong> voiceChannelIDs = new Dictionary<string, ulong>();
+
+        private static async Task SetBotStatus(DiscordClient client)
+        {
+            // Definiere die Informationen, die im Status angezeigt werden sollen
+            var statusTexts = new List<string>
+            {
+                "Akane",
+                "Type: a!help or /help",
+                $"Bot Version: v1.0", // Ersetze YourBotVersionHere durch die tatsächliche Versionsnummer deines Bots
+                $"On {client.Guilds.Count} Servers",
+                $"Watching {client.Guilds.Sum(guild => guild.Value.MemberCount)} Users",
+                $"Since {DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")} Online",
+                $"Shards: {client.ShardCount}"
+            };
+
+            var index = 0;
+            var random = new Random();
+
+            while (true)
+            {
+                // Aktualisiere den Status des Bots
+                await client.UpdateStatusAsync(new DiscordActivity(statusTexts[index], ActivityType.Watching));
+
+                // Warte für eine bestimmte Zeit, bevor der Status aktualisiert wird (Alle 30 Sekunden)
+                await Task.Delay(TimeSpan.FromSeconds(30));
+
+                // Gehe zum nächsten Status-Text, wenn das Ende der Liste erreicht ist, beginne von vorne
+                index = random.Next(statusTexts.Count);
+            }
+        }
 
         static async Task Main(string[] args)
         {
@@ -115,6 +146,7 @@ namespace Akane
             // Connect to the Client and get the Bot online
             await Client.ConnectAsync();
             await lavalink.ConnectAsync(lavalinkConfig);
+            await SetBotStatus(Client);
             await Task.Delay(-1);
         }
 
