@@ -1,5 +1,5 @@
 # Akane | Made with ❤ by [XSaitoKungX](https://github.com/XSaitoKungX) | Coded 100% in C#
-![image](Images/Akane.jpg)
+![Lokales Bild](/Images/Akane.jpg)
 
 ## 👋 Willkommen
 Einen Multifunktions-Discord-Bot, der deinem Server einen echten Mehrwert bietet! Unser Bot unterstützt sowohl Prefix- als auch Slash-Commands, um sicherzustellen, dass du und deine Community auf die Art und Weise interagieren können, die am besten zu euch passt.
