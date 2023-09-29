@@ -141,8 +141,9 @@ Wenn du Unterstützung bei der Einrichtung oder Verwendung von Akane benötigst,
 # 🔥┆Github Stats
 ![profile]
 ![languages]
-- **GitHub-Statistiken:** ![GitHub-Statistiken](https://github-readme-stats.vercel.app/api?username=XSaitoKungX&show_icons=true&theme=radical)
-- **Meist benutzte Sprache:** [languages]: https://github-readme-stats.vercel.app/api/top-langs/?username=XSaitoKungX&show_icons=true&theme=github_dark&include_all_commits=true&count_private=true&layout=compact
+
+**GitHub-Statistiken:** ![GitHub-Statistiken](https://github-readme-stats.vercel.app/api?username=XSaitoKungX&show_icons=true&theme=radical)
+**Meist benutzte Sprache:** [languages](https://github-readme-stats.vercel.app/api/top-langs/?username=XSaitoKungX&show_icons=true&theme=github_dark&include_all_commits=true&count_private=true&layout=compact)
 
 ## Lizenz 📝
 
