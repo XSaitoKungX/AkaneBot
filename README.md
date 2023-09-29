@@ -48,6 +48,11 @@ Mache deinen Discord-Server zu einem noch besseren Ort für deine Community mit 
 * Giphy API Token. Get it from [Giphy Developers Portal](https://developers.giphy.com/)
 * APi Key for OpenAi `for ai chatbot`. Get it from [OpenAi Developers Portal](https://beta.openai.com/account/api-keys)
 
+## 🌎 Locales
+
+Derzeit verfügbare Gebietsschemata sind:
+- German (de)
+
 ## <img src="https://cdn.discordapp.com/emojis/814216203466965052.png" width="25px" height="25px"> 》Installationsanleitung
 
 ## <img src="https://cdn.discordapp.com/emojis/1036083490292244493.png" width="15px" height="15px"> 》Help & Support
