@@ -133,8 +133,11 @@ Wenn du Unterstützung bei der Einrichtung oder Verwendung von Akane benötigst,
 - [Lade den Bot ein](https://discord.com/api/oauth2/authorize?client_id=1155480674707460220&permissions=8&scope=applications.commands%20bot)
 
 ## Mitwirkende 🤝
-
-- [XSaitoKungX](https://github.com/XSaitoKungX)
+### **Benutzerprofil 🧑‍💼**
+![Benutzerlogo](https://github.com/XSaitoKungX/)
+- **Benutzername:** [XSaitoKungX]
+- **GitHub:** [XSaitoKungX](https://github.com/XSaitoKungX/)
+- **GitHub-Statistiken:** ![GitHub-Statistiken](https://github-readme-stats.vercel.app/api?username=XSaitoKungX&show_icons=true&theme=radical)
 
 ## Lizenz 📝
 
