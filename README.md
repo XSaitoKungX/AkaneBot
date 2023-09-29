@@ -2,7 +2,7 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/XSaitoKungX"><img src="/Images/Akane.jpg" height="200" alt="Discord.js v14 Bot"></a>
+  <a href="https://github.com/XSaitoKungX"><img src="/Images/Akane.jpg" height="500" alt="Discord Bot with DSharpPlus v4.4.2"></a>
   <br>
   Discord.js v14 Bot
   <br>
