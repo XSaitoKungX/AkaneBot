@@ -1,10 +1,19 @@
 ﻿using Akane.Engine.ExternalClasses;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
+using Google.Apis.CustomSearchAPI.v1;
+using Google.Apis.Services;
+using OpenAI_API;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Akane.Commands.Prefix
@@ -12,8 +21,6 @@ namespace Akane.Commands.Prefix
     internal class Fun : BaseCommandModule
     {
         private readonly Random random = new Random();
-
-        private readonly string giphyApiKey = "Z1PXsFOooGkWoH9QbpnUCJJvx6I1vQGb";
 
         [Command("calculate")]
         public async Task Calculate(CommandContext ctx, double number1, string operation, double number2)
@@ -64,152 +71,6 @@ namespace Akane.Commands.Prefix
             };
 
             await ctx.RespondAsync(embed);
-        }
-
-        [Command("action")]
-        public async Task PerformAction(CommandContext ctx, string action, DiscordMember member)
-        {
-            string actionText = GetActionText(action.ToLower());
-            string actionEmoji = GetActionEmoji(action.ToLower());
-
-            if (actionText == null)
-            {
-                await ctx.Channel.SendMessageAsync("Ungültige Aktion. Unterstützte Aktionen sind: kiss, hug, cuddle, punch, baka, highfive, lapsit, lick, love, marry, massage, pat, poke, slap, steal, tickle, wave, yeet.");
-                return;
-            }
-
-            // Verwende Platzhalter {0} und {1} im Texttemplate
-            string textTemplate = $"{actionEmoji} {{1}}, {{0}} {actionText}";
-            string formattedText = string.Format(textTemplate, ctx.Member.DisplayName, member.DisplayName );
-
-            using (var httpClient = new HttpClient())
-            {
-                var giphyUrl = $"https://api.giphy.com/v1/gifs/random?api_key={giphyApiKey}&tag=anime {action}&rating=g";
-
-                try
-                {
-                    var response = await httpClient.GetStringAsync(giphyUrl);
-                    var gifData = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(response);
-
-                    string gifUrl = gifData.data?.images?.original?.url.ToString();
-
-                    if (!string.IsNullOrEmpty(gifUrl))
-                    {
-                        var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
-                        var embed = new DiscordEmbedBuilder
-                        {
-                            Title = formattedText,
-                            Color = randomColor
-                        };
-
-                        embed.ImageUrl = gifUrl;
-
-                        await ctx.RespondAsync(embed);
-                    }
-                    else
-                    {
-                        await ctx.Channel.SendMessageAsync("GIF konnte nicht gefunden werden. Bitte versuche es später erneut.");
-                    }
-                }
-                catch (HttpRequestException)
-                {
-                    await ctx.Channel.SendMessageAsync("Fehler beim Abrufen des GIFs. Bitte versuche es später erneut.");
-                }
-                catch (Newtonsoft.Json.JsonException)
-                {
-                    await ctx.Channel.SendMessageAsync("Ungültige Antwort von der GIF-API. Bitte versuche es später erneut.");
-                }
-            }
-        }
-
-        private string GetActionText(string action)
-        {
-            switch (action)
-            {
-                case "kiss":
-                    return "gibt dir einen Kuss! Voll süß 🥰";
-                case "hug":
-                    return "umarmt dich! Naww~";
-                case "cuddle":
-                    return "kuschelt mit dir!";
-                case "punch":
-                    return "verpasst dir einen Faustschlag! Richtig frech 😡";
-                case "baka":
-                    return "nennt dich Baka";
-                case "highfive":
-                    return "gibt dir einen High-Five";
-                case "lapsit":
-                    return "sitzt auf deinem Schoß";
-                case "lick":
-                    return "leckt dich! Aww~";
-                case "love":
-                    return "liebt dich! Uiii 😏";
-                case "marry":
-                    return "will dich heiraten";
-                case "massage":
-                    return "massiert dich";
-                case "pat":
-                    return "klopft dir auf die Schulter";
-                case "poke":
-                    return "stupst dich";
-                case "slap":
-                    return "gibt dir eine Ohrfeige";
-                case "steal":
-                    return "stiehlt von dir";
-                case "tickle":
-                    return "kitzelt dich";
-                case "wave":
-                    return "winkt dir zu";
-                case "yeet":
-                    return "yeetet dich";
-                default:
-                    return null;
-            }
-        }
-
-        private string GetActionEmoji(string action)
-        {
-            switch (action)
-            {
-                case "kiss":
-                    return "💋";
-                case "hug":
-                    return "🤗";
-                case "cuddle":
-                    return "🥰";
-                case "punch":
-                    return "👊";
-                case "baka":
-                    return "💢";
-                case "highfive":
-                    return "✋";
-                case "lapsit":
-                    return "👶";
-                case "lick":
-                    return "👅";
-                case "love":
-                    return "❤️";
-                case "marry":
-                    return "💍";
-                case "massage":
-                    return "💆";
-                case "pat":
-                    return "👏";
-                case "poke":
-                    return "👉";
-                case "slap":
-                    return "👋";
-                case "steal":
-                    return "🤫";
-                case "tickle":
-                    return "🤣";
-                case "wave":
-                    return "👋";
-                case "yeet":
-                    return "🚀";
-                default:
-                    return null;
-            }
         }
 
         [Command("cardgame")]
@@ -287,84 +148,402 @@ namespace Akane.Commands.Prefix
         }
 
         [Command("poll")]
-        public async Task Poll(CommandContext ctx, string option1, string option2, string option3, string option4, [RemainingText] string pollTitle)
+        [Description("Erstellt eine Umfrage")]
+        public async Task PollCommand(CommandContext ctx)
         {
-            var interactivity = Program.Client.GetInteractivity();
-            var pollTime = TimeSpan.FromSeconds(10);
+            // Schritt 1: Umfrage-Namen abfragen
+            await ctx.RespondAsync("Wie soll die Umfrage heißen? (Antworte in 3 Minuten)");
+            var pollNameResponse = await WaitForUserResponse(ctx, TimeSpan.FromMinutes(3));
 
-            DiscordEmoji[] emojiOptions =
+            if (pollNameResponse == null)
             {
-                DiscordEmoji.FromName(Program.Client, ":one:"),
-                DiscordEmoji.FromName(Program.Client, ":two:"),
-                DiscordEmoji.FromName(Program.Client, ":three:"),
-                DiscordEmoji.FromName(Program.Client, ":four:"),
-            };
+                await ctx.RespondAsync("Zeit überschritten. Die Umfrage wurde abgebrochen.");
+                return;
+            }
 
-            string optionsDescription = $"{emojiOptions[0]} | {option1} \n" +
-                                        $"{emojiOptions[1]} | {option2} \n" +
-                                        $"{emojiOptions[2]} | {option3} \n" +
-                                        $"{emojiOptions[3]} | {option4}";
+            var pollName = pollNameResponse.Content;
 
+            // Schritt 2: Anzahl der Optionen abfragen
+            await ctx.RespondAsync("Wie viele Optionen soll die Umfrage haben?");
+            var optionsCountResponse = await WaitForUserResponse(ctx, TimeSpan.FromMinutes(3));
+
+            if (optionsCountResponse == null)
+            {
+                await ctx.RespondAsync("Zeit überschritten. Die Umfrage wurde abgebrochen.");
+                return;
+            }
+
+            if (!int.TryParse(optionsCountResponse.Content, out int optionsCount) || optionsCount <= 0)
+            {
+                await ctx.RespondAsync("Ungültige Eingabe. Die Anzahl der Optionen muss eine positive ganze Zahl sein.");
+                return;
+            }
+
+            // Schritt 3: Optionen abfragen
+            var options = new List<string>();
+            for (int i = 1; i <= optionsCount; i++)
+            {
+                await ctx.RespondAsync($"Gib Option {i} ein:");
+                var optionResponse = await WaitForUserResponse(ctx, TimeSpan.FromMinutes(3));
+
+                if (optionResponse == null)
+                {
+                    await ctx.RespondAsync("Zeit überschritten. Die Umfrage wurde abgebrochen.");
+                    return;
+                }
+
+                options.Add(optionResponse.Content);
+            }
+
+            // Schritt 4: Umfragedauer abfragen
+            await ctx.RespondAsync("Wie lange soll die Umfrage dauern? `(z.B. '30min' für 30 Minute)`");
+            var durationResponse = await WaitForUserResponse(ctx, TimeSpan.FromMinutes(3));
+
+            if (durationResponse == null)
+            {
+                await ctx.RespondAsync("Zeit überschritten. Die Umfrage wurde abgebrochen.");
+                return;
+            }
+
+            if (!ParseDuration(durationResponse.Content, out TimeSpan pollDuration))
+            {
+                await ctx.RespondAsync("Ungültige Eingabe. Verwende 's' für Sekunden, 'min' für Minuten, 'h' für Stunden, 'd' für Tage oder 'month' für Monate.");
+                return;
+            }
+
+            // Schritt 5: Ziel-Channel abfragen
+            await ctx.RespondAsync("In welchen Channel soll die Umfrage gesendet werden? (Antworte mit '@Channel' oder 'Channel-ID')");
+            var channelResponse = await WaitForUserResponse(ctx, TimeSpan.FromMinutes(3));
+
+            if (channelResponse == null)
+            {
+                await ctx.RespondAsync("Zeit überschritten. Die Umfrage wurde abgebrochen.");
+                return;
+            }
+
+            ulong channelId = 0;
+            if (channelResponse.MentionedChannels.Count > 0)
+            {
+                channelId = channelResponse.MentionedChannels.First().Id;
+            }
+            else if (ulong.TryParse(channelResponse.Content, out ulong parsedChannelId))
+            {
+                channelId = parsedChannelId;
+            }
+            else
+            {
+                await ctx.RespondAsync("Ungültige Eingabe. Bitte ping einen Channel oder gib seine ID ein.");
+                return;
+            }
+
+            // Schritt 6: Umfrage erstellen und senden
+            var pollEmbed = CreatePollEmbed(pollName, options, ctx.Member.Username, pollDuration);
+            var pollMessage = await ctx.Client.GetChannelAsync(channelId).Result.SendMessageAsync(embed: pollEmbed);
+
+            await ctx.RespondAsync($"Die Umfrage **{pollName}** wurde erfolgreich in {ctx.Channel.Mention} erstellt!");
+
+            // Schritt 7: Timer für das Beenden der Umfrage einrichten
+            for (int i = 0; i < options.Count; i++)
+            {
+                var optionEmojis = GetOptionEmoji(i + 1);
+                await pollMessage.CreateReactionAsync(DiscordEmoji.FromUnicode(optionEmojis));
+            }
+
+            // Schritt 8: Timer für das Beenden der Umfrage einrichten
+            var timer = new Timer(async _ =>
+            {
+                // Umfrageergebnisse sammeln
+                var pollResults = new Dictionary<string, int>();
+                foreach (var option in options)
+                {
+                    pollResults[option] = 0;
+                }
+
+                foreach (var option in options)
+                {
+                    var emoji = DiscordEmoji.FromUnicode(GetOptionEmoji(options.IndexOf(option) + 1));
+                    var reactionUsers = await pollMessage.GetReactionsAsync(emoji).ConfigureAwait(false);
+                    pollResults[option] = reactionUsers.Count;
+                }
+
+                // Umfrage-Embed bearbeiten und Ergebnisse anzeigen
+                var updatedEmbed = UpdatePollEmbed(pollEmbed, pollResults);
+                await pollMessage.ModifyAsync(updatedEmbed).ConfigureAwait(false);
+            }, null, pollDuration, Timeout.InfiniteTimeSpan);
+        }
+
+        private DiscordEmbed CreatePollEmbed(string pollName, List<string> options, string author, TimeSpan duration)
+        {
             var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
-            var pollMessage = new DiscordEmbedBuilder()
+
+            var pollEmbed = new DiscordEmbedBuilder
             {
-                Title = pollTitle,
-                Description = optionsDescription,
-                Color = randomColor
+                Title = pollName,
+                Description = string.Join("\n", options.Select((option, index) => $"{GetOptionEmoji(index + 1)} {option}")),
+                Color = randomColor,
+                Footer = new DiscordEmbedBuilder.EmbedFooter
+                {
+                    Text = $"Erstellt von {author}",
+                },
             };
 
-            var sentPoll = await ctx.Channel.SendMessageAsync(pollMessage);
+            pollEmbed.AddField("Dauer", FormatDuration(duration), true);
 
-            foreach (var emoji in emojiOptions)
+            return pollEmbed;
+        }
+
+        private DiscordEmbed UpdatePollEmbed(DiscordEmbed originalEmbed, Dictionary<string, int> results)
+        {
+            var updatedEmbed = new DiscordEmbedBuilder(originalEmbed);
+
+            var totalVotes = results.Values.Sum();
+            var resultsText = string.Join("\n", results.Select(kv => $"{kv.Key} - {kv.Value} Stimmen ({(double)kv.Value / totalVotes * 100:F2}%)"));
+
+            updatedEmbed.AddField("Ergebnisse", resultsText);
+
+            return updatedEmbed;
+        }
+
+        private string GetOptionEmoji(int optionNumber)
+        {
+            // Hier kannst du die Emojis für die Optionen anpassen oder erweitern
+            string[] emojis = { "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣", "🔟" };
+
+            if (optionNumber >= 1 && optionNumber <= emojis.Length)
             {
-                await sentPoll.CreateReactionAsync(emoji);
+                return emojis[optionNumber - 1];
+            }
+            else
+            {
+                return optionNumber.ToString();
+            }
+        }
+
+        private string FormatDuration(TimeSpan duration)
+        {
+            string formattedDuration = "";
+
+            if (duration.Days > 0)
+            {
+                formattedDuration += $"{duration.Days}d ";
             }
 
-            var totalReactions = await interactivity.CollectReactionsAsync(sentPoll, pollTime);
-
-            int count1 = 0;
-            int count2 = 0;
-            int count3 = 0;
-            int count4 = 0;
-
-            foreach (var emoji in totalReactions)
+            if (duration.Hours > 0)
             {
-                if (emoji.Emoji == emojiOptions[0])
-                {
-                    count1++;
-                }
+                formattedDuration += $"{duration.Hours}h ";
+            }
 
-                if (emoji.Emoji == emojiOptions[1])
-                {
-                    count2++;
-                }
+            if (duration.Minutes > 0)
+            {
+                formattedDuration += $"{duration.Minutes}min ";
+            }
 
-                if (emoji.Emoji == emojiOptions[2])
-                {
-                    count3++;
-                }
+            if (duration.Seconds > 0)
+            {
+                formattedDuration += $"{duration.Seconds}s";
+            }
 
-                if (emoji.Emoji == emojiOptions[3])
+            return formattedDuration.Trim();
+        }
+
+        private bool ParseDuration(string input, out TimeSpan duration)
+        {
+            duration = TimeSpan.Zero;
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+
+            input = input.Trim().ToLower();
+
+            if (input.EndsWith("s"))
+            {
+                if (double.TryParse(input.Substring(0, input.Length - 1), out double seconds))
                 {
-                    count4++;
+                    duration = TimeSpan.FromSeconds(seconds);
+                    return true;
+                }
+            }
+            else if (input.EndsWith("min"))
+            {
+                if (double.TryParse(input.Substring(0, input.Length - 3), out double minutes))
+                {
+                    duration = TimeSpan.FromMinutes(minutes);
+                    return true;
+                }
+            }
+            else if (input.EndsWith("h"))
+            {
+                if (double.TryParse(input.Substring(0, input.Length - 1), out double hours))
+                {
+                    duration = TimeSpan.FromHours(hours);
+                    return true;
+                }
+            }
+            else if (input.EndsWith("d"))
+            {
+                if (double.TryParse(input.Substring(0, input.Length - 1), out double days))
+                {
+                    duration = TimeSpan.FromDays(days);
+                    return true;
+                }
+            }
+            else if (input.EndsWith("month"))
+            {
+                if (double.TryParse(input.Substring(0, input.Length - 5), out double months))
+                {
+                    duration = TimeSpan.FromDays(months * 30); // Annähernde Anzahl von Tagen in einem Monat
+                    return true;
                 }
             }
 
-            int totalVotes = count1 + count2 + count3 + count4;
-            string resultsDescription = $"{emojiOptions[0]}: {count1} Votes \n" +
-                                        $"{emojiOptions[1]}: {count2} Votes \n" +
-                                        $"{emojiOptions[2]}: {count3} Votes \n" +
-                                        $"{emojiOptions[3]}: {count4} Votes \n\n" +
-                                        $"Total Votes: {totalVotes}";
+            return false;
+        }
 
-            var resultEmbed = new DiscordEmbedBuilder()
+        private async Task<DiscordMessage> WaitForUserResponse(CommandContext ctx, TimeSpan timeout)
+        {
+            try
             {
-                Title = "📊 Ergebnis der Umfrage",
-                Description = resultsDescription,
-                Color = randomColor
-            };
+                var interactivity = ctx.Client.GetInteractivity();
+                var response = await interactivity.WaitForMessageAsync(x => 
+                x.Author.Id == ctx.User.Id && x.Channel.Id == ctx.Channel.Id && !x.Author.IsBot, timeout);
+                return response.Result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
 
-            await ctx.Channel.SendMessageAsync(resultEmbed);
+        [Command("image")]
+        [Description("Sucht in Google Images nach der angegebenen Suchanfrage")]
+        public async Task ImageSearch(CommandContext ctx, [RemainingText] string query)
+        {
+            // Clearing the dictionary so we can populate it with new images
+            Program.imageHandler.images.Clear();
+            int IDCount = 0;
+
+            // Replace with your own Custom Search Engine ID and API Key
+            // https://cse.google.com/cse.js?cx=34e1a705bcc3a4f02
+            string cseId = "34e1a705bcc3a4f02";
+            string apiKey = "AIzaSyBjSnKalOVzUwTech1xK67u9HxlGP1aVeQ";
+
+            // Initialise the API
+            var customSearchService = new CustomSearchAPIService(new BaseClientService.Initializer
+            {
+                ApplicationName = "Akane",
+                ApiKey = apiKey,
+            });
+
+            // Create search request
+            var listRequest = customSearchService.Cse.List();
+            listRequest.Cx = cseId;
+            listRequest.Num = 10;
+            listRequest.SearchType = CseResource.ListRequest.SearchTypeEnum.Image;
+            listRequest.Q = query;
+
+            // Execute the search request & get the results
+            var search = await listRequest.ExecuteAsync();
+            var results = search.Items;
+
+            // Foreach through the results and add each image link into the dictionary
+            foreach (var result in results)
+            {
+                Program.imageHandler.images.Add(IDCount, result.Link);
+                IDCount++;
+            }
+
+            // If there are no results, then display an error message, else show the images
+            if (results == null || !results.Any())
+            {
+                var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+                var embed = new DiscordEmbedBuilder
+                {
+                    Title = "Keine Ergebnisse gefunden!",
+                    Color = randomColor,
+                };
+
+                await ctx.RespondAsync(embed);
+                return;
+            }
+            else
+            {
+                // Create the buttons for this Embed
+                var previousEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(ctx.Client, ":track_previous:"));
+                var previousButton = new DiscordButtonComponent(ButtonStyle.Primary, "previousButton", "Previous", false, previousEmoji);
+
+                var nextEmoji = new DiscordComponentEmoji(DiscordEmoji.FromName(ctx.Client, ":track_next:"));
+                var nextButton = new DiscordButtonComponent(ButtonStyle.Primary, "nextButton", "Next", false, nextEmoji);
+
+                // Display the First Result
+                var firstResult = results.First();
+
+                var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+                var imageMessage = new DiscordMessageBuilder()
+                    .WithEmbed(new DiscordEmbedBuilder()
+                    {
+                        Title = $"Ergebnis für Suchanfrage: {query}",
+                        Color = randomColor,
+                        ImageUrl = firstResult.Link
+                    })
+                    .AddComponents(previousButton, nextButton);
+
+                await ctx.Channel.SendMessageAsync(imageMessage);
+            }
+        }
+
+        [Command("chatgpt")]
+        public async Task ChatGPT(CommandContext ctx, params string[] message)
+        {
+            // Stelle sicher, dass eine Nachricht eingegeben wurde
+            if (message.Length == 0)
+            {
+                await ctx.RespondAsync("Du musst eine Nachricht eingeben, damit ich antworten kann.");
+                return;
+            }
+
+            try
+            {
+                // API-Schlüssel für OpenAI
+                string apiKey = "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";
+
+                // Initialisiere die OpenAIAPI
+                var api = new OpenAIAPI(apiKey);
+
+                // Initialisiere eine neue Chat-Konversation
+                var chat = api.Chat.CreateConversation();
+                chat.AppendSystemMessage("Gib eine Suchanfrage ein.");
+
+                // Füge die Benutzereingabe als Nachricht hinzu
+                chat.AppendUserInput(string.Join(" ", message));
+
+                // Hole die Antwort von ChatGPT
+                string response = await chat.GetResponseFromChatbot();
+
+                // Sende die Antwort als Discord Embed Message
+                var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+                var responseMsg = new DiscordEmbedBuilder()
+                {
+                    Title = string.Join(" ", message),
+                    Description = response,
+                    Color = randomColor
+                };
+
+                await ctx.RespondAsync(embed: responseMsg);
+            }
+            catch (Exception ex)
+            {
+                // Behandle Fehler und gebe eine Fehlermeldung aus
+                var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+                var errorMessage = new DiscordEmbedBuilder()
+                {
+                    Title = "Ein Fehler ist aufgetreten:",
+                    Description = ex.Message,
+                    Color = randomColor
+                };
+                await ctx.RespondAsync(embed: errorMessage);
+            }
         }
     }
 }
