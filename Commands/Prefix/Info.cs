@@ -1,10 +1,15 @@
 ﻿using Akane.Engine.LevelSystem;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Akane.Commands.Prefix
@@ -46,24 +51,85 @@ namespace Akane.Commands.Prefix
         }
 
         [Command("help")]
+        [Description("Liste alle Commands von Bot auf")]
         public async Task HelpCommand(CommandContext ctx)
         {
-            var funButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "funButton", "Fun");
-            var infoButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "InfoButton", "Info");
-            var musicButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "MusicButton", "Music");
-            var aiButton = new DiscordButtonComponent(DSharpPlus.ButtonStyle.Success, "UserRequestButton", "AI");
-
             var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+            // Obtaining all registered commands
+            var commands = ctx.CommandsNext.RegisteredCommands;
+
+            // Make a list of commands and their descriptions
+            var categories = new Dictionary<string, List<Command>>();
+            var allCommands = ctx.CommandsNext.RegisteredCommands;
+
+            var page = 0;
+            var pageSize = 10; // Anzahl der Befehle pro Seite
+            var totalPages = (int)Math.Ceiling(commands.Count() / (double)pageSize);
+
+            // Main-Page (Info)
             var helpMessage = new DiscordMessageBuilder()
                 .WithEmbed(new DiscordEmbedBuilder()
                 {
                     Title = $"{ctx.Client.CurrentUser.Username}'s Help Menu",
-                    Description = "Bitte wähle eine Schaltfläche aus, um weitere Informationen zu den Befehlen zu erhalten",
+                    Description = "Informationen über __**Akane**__ \n" +
+                    "__**Funktionen**__ \n" +
+                    "> 5+ Systeme, z.B.: Welcome, ChatGPT, Levelsystem, Musik und vieles mehr \n\n" +
+                    "Wie benutze ich __**Akane**__? \n" +
+                    "> Um Befehle auszuführen, gebe `a![Command]` ein oder um alle Befehle zu sehen, gebe `a!help` ein \n\n" +
+                    "__**Akane's Stats**__ \n" +
+                    $"> {commands.Count()} Commands \n" +
+                    $"> Seit {DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")} Online \n" +
+                    $"> Ping: {ctx.Client.Ping}ms \n" +
+                    "> Entwickelt von [Splay Development]() \n" +
+                    $"> Developer: `꧁Saito꧂` <@{ctx.User.Id}> \n\n" +
+                    "__**Wie kann ich Hilfe bekommen?**__ \n" +
+                    "> Du kannst die untenstehenden Buttons verwenden, um zwischen Seiten zu wechseln",
                     Color = randomColor
-                })
-                .AddComponents(funButton, infoButton, musicButton, aiButton);
+                });
 
-            await ctx.Channel.SendMessageAsync(helpMessage);
+            var buttons = new DiscordComponent[]
+            {
+                new DiscordButtonComponent(ButtonStyle.Primary, "back", "◀", false),
+                new DiscordButtonComponent(ButtonStyle.Primary, "next", "▶", false)
+            };
+
+            helpMessage.AddComponents(buttons);
+
+            var msg = await ctx.Channel.SendMessageAsync(helpMessage);
+
+            // Wait for button interactive
+            while (true)
+            {
+                var interactivity = ctx.Client.GetInteractivity();
+                var result = await interactivity.WaitForButtonAsync(msg, TimeSpan.FromMinutes(5));
+
+                if (result.Result == null)
+                    break; // Timeout
+
+                if (result.Result.Id == "back")
+                {
+                    page = (page - 1 + totalPages) % totalPages;
+                }
+                else if (result.Result.Id == "next")
+                {
+                    page = (page + 1) % totalPages;
+                }
+
+                // Update the embedded message with the commands for the current page
+                var pageCommands = allCommands.Skip(page * pageSize).Take(pageSize);
+                var pageDescription = string.Join("\n", pageCommands.Select(cmd => $"**{cmd.Value.Name}**: {cmd.Value.Description ?? "Keine Beschreibung"}"));
+
+                helpMessage = new DiscordMessageBuilder()
+                    .WithEmbed(new DiscordEmbedBuilder()
+                    {
+                        Title = $"{ctx.Client.CurrentUser.Username}'s Help Menu (Seite {page + 1}/{totalPages})",
+                        Description = pageDescription,
+                        Color = randomColor
+                    });
+
+                helpMessage.AddComponents(buttons);
+                await msg.ModifyAsync(helpMessage);
+            }
         }
 
         [Command("profile")]
@@ -164,7 +230,7 @@ namespace Akane.Commands.Prefix
             var ramUsage = $"{(GC.GetTotalMemory(true) / (1024 * 1024)):F2} MB";
 
             var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
-            // Erstelle ein Embed
+            // Create a Embed
             var embed = new DiscordEmbedBuilder
             {
                 Title = "🏓 Pong!",
@@ -187,14 +253,14 @@ namespace Akane.Commands.Prefix
         [Command("uptime")]
         public async Task Uptime(CommandContext ctx)
         {
-            // Aktuelle Zeit
+            // Current time
             var currentTime = DateTime.Now;
 
-            // Berechnung der Uptime
+            // Calculation of uptime
             var uptime = currentTime - StartTime;
 
             var randomColor = new DiscordColor((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
-            // Erstelle ein Embed
+            // Create a Embed
             var embed = new DiscordEmbedBuilder
             {
                 Title = "⏳ Bot Uptime",
