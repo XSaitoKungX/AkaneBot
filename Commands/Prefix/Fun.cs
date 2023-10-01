@@ -425,9 +425,8 @@ namespace Akane.Commands.Prefix
             int IDCount = 0;
 
             // Replace with your own Custom Search Engine ID and API Key
-            // https://cse.google.com/cse.js?cx=34e1a705bcc3a4f02
-            string cseId = "34e1a705bcc3a4f02";
-            string apiKey = "AIzaSyBjSnKalOVzUwTech1xK67u9HxlGP1aVeQ";
+            string cseId = "CSE-ID-HERE";
+            string apiKey = "API-KEY-HERE";
 
             // Initialise the API
             var customSearchService = new CustomSearchAPIService(new BaseClientService.Initializer
@@ -506,7 +505,7 @@ namespace Akane.Commands.Prefix
             try
             {
                 // API-Schlüssel für OpenAI
-                string apiKey = "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";
+                string apiKey = "API-KEY-HERE";
 
                 // Initialisiere die OpenAIAPI
                 var api = new OpenAIAPI(apiKey);
