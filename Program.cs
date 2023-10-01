@@ -39,11 +39,11 @@ namespace Akane
             // Definiere die Informationen, die im Status angezeigt werden sollen
             var statusTexts = new List<string>
             {
-                "Akane",
+                $"{client.CurrentUser.Username}",
                 "Type: a!help or /help",
                 $"Bot Version: v1.0", // Ersetze YourBotVersionHere durch die tatsächliche Versionsnummer deines Bots
                 $"On {client.Guilds.Count} Servers",
-                $"Watching {client.Guilds.Sum(guild => guild.Value.MemberCount)} Users",
+                $"{client.Guilds.Sum(guild => guild.Value.MemberCount)} Users",
                 $"Since {DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss")} Online",
                 $"Shards: {client.ShardCount}"
             };
@@ -113,11 +113,17 @@ namespace Akane
             var slashCommandsConfig = Client.UseSlashCommands();
 
             // Prefix Based Commands
+            Commands.RegisterCommands<Admin>();
+            Commands.RegisterCommands<Anime>();
             Commands.RegisterCommands<Fun>();
+            Commands.RegisterCommands<Giveaway>();
             Commands.RegisterCommands<Info>();
+            Commands.RegisterCommands<Invites>();
+            Commands.RegisterCommands<Moderation>();
             Commands.RegisterCommands<Music>();
-            Commands.RegisterCommands<DiscordComponentCommands>();
-            Commands.RegisterCommands<UserRequestedCommands>();
+            Commands.RegisterCommands<Owner>();
+            Commands.RegisterCommands<Ticket>();
+            Commands.RegisterCommands<Utility>();
 
             // Slash Commands
             slashCommandsConfig.RegisterCommands<FunSL>();
@@ -152,7 +158,36 @@ namespace Akane
 
         private static Task Client_Ready(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Bot wurde erfolgreich gestartet und ist einsatzbereit. Der Bot ist unter den Namen {sender.CurrentUser.Username}#{sender.CurrentUser.Discriminator} Online");
+            Console.ResetColor();
+
+            // Information
+            Console.WriteLine($"Bot Version: v1.0");
+            Console.WriteLine($"Auf {sender.Guilds.Count} Servern");
+            Console.WriteLine($"{sender.Guilds.Sum(guild => guild.Value.MemberCount)} Benutzer");
+            Console.WriteLine($"Shards: {sender.ShardCount}");
+
+            PrintCommandsTable(sender.GetCommandsNext().RegisteredCommands.Values);
+
             return Task.CompletedTask;
+        }
+
+        private static void PrintCommandsTable(IEnumerable<Command> commands)
+        {
+            Console.WriteLine("+------------------+----------------------+");
+            Console.WriteLine("|     Command      |         Beschreibung         |");
+            Console.WriteLine("+------------------+----------------------+");
+
+            foreach (var command in commands)
+            {
+                string commandName = command.Name;
+                string commandDescription = command.Description ?? "Keine Beschreibung";
+
+                Console.WriteLine($"| {commandName,-15} | {commandDescription,-20} |");
+            }
+
+            Console.WriteLine("+------------------+----------------------+");
         }
 
         private static async Task UserJoinHandler(DiscordClient sender, DSharpPlus.EventArgs.GuildMemberAddEventArgs args)
@@ -164,6 +199,7 @@ namespace Akane
                 Title = $"Willkommen {args.Member.Username} auf dem Server!",
                 Description = "Wir hoffen, dass du bei uns einen guten Start bei uns hast. Vergiss nicht unsere Regeln durchzulesen!",
                 Color = DiscordColor.Green,
+                ImageUrl = "https://i.pinimg.com/736x/fa/ab/f0/faabf039c3c9d50462c2e2dd660edd04.jpg"
             };
 
             await defaultChannel.SendMessageAsync(welcomeEmbed);
@@ -327,7 +363,28 @@ namespace Akane
                         "a!embedmessage1 -> Sends an embed message \n" +
                         "a!poll -> Starts a poll";
 
-                    await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(funCommandsList));
+                    var funCommandsEmbed = new DiscordEmbedBuilder()
+                    {
+                        Title = "Fun Commands",
+                        Description = funCommandsList,
+                        Color = DiscordColor.Rose
+                    };
+
+                    await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(funCommandsEmbed));
+                    break;
+
+                case "userRequestButton":
+                    string userRequestCommandsList = "a!image \n" +
+                        "a!chatgpt [message]";
+
+                    var userRequestCommandsEmbed = new DiscordEmbedBuilder()
+                    {
+                        Title = "User-Request Commands",
+                        Description = userRequestCommandsList,
+                        Color = DiscordColor.Rose
+                    };
+
+                    await args.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().AddEmbed(userRequestCommandsEmbed));
                     break;
 
                 case "previousButton":
